@@ -9,8 +9,6 @@ const GAME_WIDTH = 262;
 const GAME_HEIGHT = 262;
 const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
 const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
-// const GAME_X_OFFSET = 0;
-// const GAME_Y_OFFSET = 0;
 
 const SCALE_FACTOR = GAME_WIDTH / 1000; // Original was 1000x1000
 
@@ -37,10 +35,8 @@ const sketch = (p) => {
 
         // Player 1
         tanks.push({
-            x: 10,
-            y: 10,
-            // x: GAME_X_OFFSET + GAME_WIDTH / 4,
-            // y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
+            x: GAME_X_OFFSET + GAME_WIDTH / 4,
+            y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 1,
@@ -49,10 +45,8 @@ const sketch = (p) => {
         });
         // Player 2
         tanks.push({
-            x: 200,
-            y: 200,
-            // x: GAME_X_OFFSET + GAME_WIDTH * 3 / 4,
-            // y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
+            x: GAME_X_OFFSET + GAME_WIDTH * 3 / 4,
+            y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 2,
@@ -224,7 +218,10 @@ const sketch = (p) => {
         for (let j = 1; j < gridRows; j++) {
             p.line(GAME_X_OFFSET, GAME_Y_OFFSET + j * GRID_CELL_SIZE, GAME_X_OFFSET + GAME_WIDTH, GAME_Y_OFFSET + j * GRID_CELL_SIZE);
         }
-        p.pop(); // Restore original drawing styles (including rectMode)
+        p.pop(); // Restore original drawing styles
+
+        // Restore rectMode for other draw functions
+        p.rectMode(p.CENTER);
     };
 
     p.updateGridState = () => {
