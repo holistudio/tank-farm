@@ -7,8 +7,10 @@ const WIDTH = 336;
 const HEIGHT = 262;
 const GAME_WIDTH = 262;
 const GAME_HEIGHT = 262;
-const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
-const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
+// const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
+// const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
+const GAME_X_OFFSET = 0;
+const GAME_Y_OFFSET = 0;
 
 const SCALE_FACTOR = GAME_WIDTH / 1000; // Original was 1000x1000
 
@@ -33,7 +35,7 @@ const sketch = (p) => {
         p.rectMode(p.CENTER);
         p.textAlign(p.CENTER, p.CENTER);
 
-        // Player 1 (WASD)
+        // Player 1
         tanks.push({
             x: GAME_X_OFFSET + GAME_WIDTH / 4,
             y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
@@ -43,7 +45,7 @@ const sketch = (p) => {
             bodyAngle: p.PI / 2, // Pointing up
             turretAngle: p.PI / 2
         });
-        // Player 2 (Arrow Keys)
+        // Player 2
         tanks.push({
             x: GAME_X_OFFSET + GAME_WIDTH * 3 / 4,
             y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
