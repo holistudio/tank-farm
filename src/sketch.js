@@ -35,7 +35,7 @@ const sketch = (p) => {
 
         // Player 1
         tanks.push({
-            x: GAME_X_OFFSET + GAME_WIDTH / 4,
+            x: GAME_X_OFFSET + GAME_WIDTH / 2,
             y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
@@ -306,48 +306,48 @@ const sketch = (p) => {
 
     p.updateBullets = () => {
         for (let i = bullets.length - 1; i >= 0; i--) {
-        let bullet = bullets[i];
-        let bulletGridX = p.floor((bullet.x - GAME_X_OFFSET) / GRID_CELL_SIZE);
-        let bulletGridY = p.floor((bullet.y - GAME_Y_OFFSET) / GRID_CELL_SIZE);
+            let bullet = bullets[i];
+            let bulletGridX = p.floor((bullet.x - GAME_X_OFFSET) / GRID_CELL_SIZE);
+            let bulletGridY = p.floor((bullet.y - GAME_Y_OFFSET) / GRID_CELL_SIZE);
 
-        // Check if the bullet is in a neighboring square (but not the center one)
-        const inNeighborSquare = p.abs(bulletGridX - bullet.originGridX) <= 1 && p.abs(bulletGridY - bullet.originGridY) <= 1;
-        const inCenterSquare = bulletGridX === bullet.originGridX && bulletGridY === bullet.originGridY;
+            // Check if the bullet is in a neighboring square (but not the center one)
+            const inNeighborSquare = p.abs(bulletGridX - bullet.originGridX) <= 1 && p.abs(bulletGridY - bullet.originGridY) <= 1;
+            const inCenterSquare = bulletGridX === bullet.originGridX && bulletGridY === bullet.originGridY;
 
-        if (inNeighborSquare && !inCenterSquare && bulletGridX >= 0 && bulletGridX < gridCols && bulletGridY >= 0 && bulletGridY < gridRows) {
-        let cell = gridState[bulletGridX][bulletGridY];
-        const wasContested = cell.player1 && cell.player2;
+            if (inNeighborSquare && !inCenterSquare && bulletGridX >= 0 && bulletGridX < gridCols && bulletGridY >= 0 && bulletGridY < gridRows) {
+            let cell = gridState[bulletGridX][bulletGridY];
+            const wasContested = cell.player1 && cell.player2;
 
-        if (bullet.owner === 1) {
-            cell.player1 = true;
-        } else if (bullet.owner === 2) {
-            cell.player2 = true;
+            if (bullet.owner === 1) {
+                cell.player1 = true;
+            } else if (bullet.owner === 2) {
+                cell.player2 = true;
+            }
+
+            const isNowContested = cell.player1 && cell.player2;
+            const isNowSinglePlayer = (cell.player1 && !cell.player2) || (!cell.player1 && cell.player2);
+
+            if (isNowContested && !wasContested) {
+                // State changed to contested: start capture timer, stop decay timer.
+                cell.contestedTimestamp = p.millis(); // Start capture timer
+                cell.singlePlayerTimestamp = null; // Stop decay timer
+            } else if (isNowSinglePlayer) {
+                // State is single-player: start or reset the decay timer.
+                cell.singlePlayerTimestamp = p.millis();
+            }
+
+            bullets.splice(i, 1);
+            continue; // Skip to the next bullet
+            }
+
+            bullet.x += bulletSpeed * p.cos(bullet.angle);
+            bullet.y += bulletSpeed * p.sin(bullet.angle);
+
+            // Remove bullets that go off-screen
+            if (bullet.x < GAME_X_OFFSET || bullet.x > GAME_X_OFFSET + GAME_WIDTH || bullet.y < GAME_Y_OFFSET || bullet.y > GAME_Y_OFFSET + GAME_HEIGHT) {
+            bullets.splice(i, 1);
+            }
         }
-
-        const isNowContested = cell.player1 && cell.player2;
-        const isNowSinglePlayer = (cell.player1 && !cell.player2) || (!cell.player1 && cell.player2);
-
-        if (isNowContested && !wasContested) {
-            // State changed to contested: start capture timer, stop decay timer.
-            cell.contestedTimestamp = p.millis(); // Start capture timer
-            cell.singlePlayerTimestamp = null; // Stop decay timer
-        } else if (isNowSinglePlayer) {
-            // State is single-player: start or reset the decay timer.
-            cell.singlePlayerTimestamp = p.millis();
-        }
-
-        bullets.splice(i, 1);
-        continue; // Skip to the next bullet
-        }
-
-        bullet.x += bulletSpeed * cos(bullet.angle);
-        bullet.y += bulletSpeed * p.sin(bullet.angle);
-
-        // Remove bullets that go off-screen
-        if (bullet.x < GAME_X_OFFSET || bullet.x > GAME_X_OFFSET + GAME_WIDTH || bullet.y < GAME_Y_OFFSET || bullet.y > GAME_Y_OFFSET + GAME_HEIGHT) {
-        bullets.splice(i, 1);
-        }
-    }
     };
 
     p.drawBullets = () => {
@@ -360,7 +360,7 @@ const sketch = (p) => {
             p.line(0, 0, 10 * SCALE_FACTOR, 0); // Draw bullet as a short line
             p.pop();
         }
-    }
+    };
 
 };
 
