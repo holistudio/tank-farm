@@ -1,0 +1,16 @@
+{
+  "$schema": "https://rcade.dev/manifest.schema.json",
+  "name": "tank-farm",
+  "display_name": "Tanks Go Bloom",
+  "description": "two tanks growing together",
+  "visibility": "private",
+  "authors": {
+    "display_name": "Dan Lu"
+  },
+  "dependencies": [
+    {
+      "name": "@rcade/input-classic",
+      "version": "1.0.0"
+    }
+  ]
+}
