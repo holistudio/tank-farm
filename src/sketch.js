@@ -7,10 +7,10 @@ const WIDTH = 336;
 const HEIGHT = 262;
 const GAME_WIDTH = 262;
 const GAME_HEIGHT = 262;
-// const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
-// const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
-const GAME_X_OFFSET = 0;
-const GAME_Y_OFFSET = 0;
+const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
+const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
+// const GAME_X_OFFSET = 0;
+// const GAME_Y_OFFSET = 0;
 
 const SCALE_FACTOR = GAME_WIDTH / 1000; // Original was 1000x1000
 
@@ -37,8 +37,10 @@ const sketch = (p) => {
 
         // Player 1
         tanks.push({
-            x: GAME_X_OFFSET + GAME_WIDTH / 4,
-            y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
+            x: 10,
+            y: 10,
+            // x: GAME_X_OFFSET + GAME_WIDTH / 4,
+            // y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 1,
@@ -47,8 +49,10 @@ const sketch = (p) => {
         });
         // Player 2
         tanks.push({
-            x: GAME_X_OFFSET + GAME_WIDTH * 3 / 4,
-            y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
+            x: 200,
+            y: 200,
+            // x: GAME_X_OFFSET + GAME_WIDTH * 3 / 4,
+            // y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 2,
