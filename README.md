@@ -2,9 +2,15 @@
 
 two tanks growing together
 
-## About RCade
+This is an RCade port of project-tank p5js game.
 
-This game is built for [RCade](https://rcade.recurse.com), a custom arcade cabinet at The Recurse Center. Learn more about the project at [github.com/fcjr/RCade](https://github.com/fcjr/RCade).
+It is now LIVE on RCade at [The Recurse Center](https://recurse.com)
+
+[<img src="assets/5_rcade_irl.png" width="500 px">](assets/demo.mov)
+
+
+
+
 
 ## Getting Started
 
@@ -21,6 +27,38 @@ npm run dev
 ```
 
 This launches Vite on port 5173 and connects to the RCade cabinet emulator.
+
+## Emulator Controls
+
+```
+  | Key      | Action           |
+  |----------|------------------|
+  | Player 1 |                  |
+  | W        | UP               |
+  | S        | DOWN             |
+  | A        | LEFT             |
+  | D        | RIGHT            |
+  | F        | A Button         |
+  | G        | B Button         |
+  | Player 2 |                  |
+  | I        | UP               |
+  | K        | DOWN             |
+  | J        | LEFT             |
+  | L        | RIGHT            |
+  | ;        | A Button         |
+  | '        | B Button         |
+  | System   |                  |
+  | 2        | Two Player Start |
+
+  Spinner Controls (@rcade/input-spinners)
+
+  | Key | Action           |
+  |-----|------------------|
+  | C   | P1 Spinner Left  |
+  | V   | P1 Spinner Right |
+  | .   | P2 Spinner Left  |
+  | /   | P2 Spinner Right |
+```
 
 ## Building
 
@@ -40,31 +78,9 @@ Output goes to `dist/` and is ready for deployment.
 └── package.json
 ```
 
-## p5.js Basics
-
-The template uses p5.js in [instance mode](https://github.com/processing/p5.js/wiki/Global-and-instance-mode):
-
-```js
-import p5 from "p5";
-
-const sketch = (p) => {
-    p.setup = () => {
-        p.createCanvas(336, 262);  // RCade dimensions
-    };
-
-    p.draw = () => {
-        p.background(26, 26, 46);
-        p.fill(255);
-        p.ellipse(p.width / 2, p.height / 2, 50, 50);
-    };
-};
-
-new p5(sketch, document.getElementById("sketch"));
-```
-
 ## Arcade Controls
 
-This template uses `@rcade/plugin-input-classic` for arcade input:
+This template uses `@rcade/plugin-input-classic` and `@rcade/plugin-input-spinners` for arcade input:
 
 ```js
 import { PLAYER_1, SYSTEM } from '@rcade/plugin-input-classic'
@@ -79,30 +95,22 @@ if (PLAYER_1.DPAD.right) { /* ... */ }
 if (PLAYER_1.A) { /* ... */ }
 if (PLAYER_1.B) { /* ... */ }
 
+// Spinner Angle
+tank.turretAngle = SPINNER_1.SPINNER.angle
+
+// Same for PLAYER 2
+
 // System
-if (SYSTEM.ONE_PLAYER) { /* Start game */ }
+if (SYSTEM.TWO_PLAYER) { /* Start game */ }
 ```
+
+## About RCade
+
+This game is built for [RCade](https://rcade.recurse.com), a custom arcade cabinet at The Recurse Center. Learn more about the project at [github.com/fcjr/RCade](https://github.com/fcjr/RCade).
 
 ## RCade Screen Size
 
 The RCade cabinet uses a 336x262 pixel display. The template is pre-configured with these dimensions.
-
-## Deployment
-
-First, create a new repository on GitHub:
-
-1. Go to [github.com/new](https://github.com/new)
-2. Create a new repository (can be public or private)
-3. **Don't** initialize it with a README, .gitignore, or license
-
-Then connect your local project and push:
-
-```bash
-git remote add origin git@github.com:YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-
-The included GitHub Actions workflow will automatically deploy to RCade.
 
 ---
 
