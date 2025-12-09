@@ -6,11 +6,9 @@ This is an RCade port of project-tank p5js game.
 
 It is now LIVE on RCade at [The Recurse Center](https://recurse.com)
 
-[<img src="assets/5_rcade_irl.png" width="500 px">](assets/demo.mov)
-
-
-
-
+<video src="assets/demo.mp4" controls width="640">
+  Your browser does not support the video tag.
+</video>
 
 ## Getting Started
 
