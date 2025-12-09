@@ -77,7 +77,8 @@ Output goes to `dist/` and is ready for deployment.
 This template uses `@rcade/plugin-input-classic` and `@rcade/plugin-input-spinners` for arcade input:
 
 ```js
-import { PLAYER_1, SYSTEM } from '@rcade/plugin-input-classic'
+import { PLAYER_1, PLAYER_2 SYSTEM } from '@rcade/plugin-input-classic'
+import { PLAYER_1 as SPINNER_1, PLAYER_2 as SPINNER_2 } from "@rcade/plugin-input-spinners"
 
 // D-pad
 if (PLAYER_1.DPAD.up) { /* ... */ }
@@ -92,7 +93,7 @@ if (PLAYER_1.B) { /* ... */ }
 // Spinner Angle
 tank.turretAngle = SPINNER_1.SPINNER.angle
 
-// Same for PLAYER 2
+// Same for PLAYER_2
 
 // System
 if (SYSTEM.TWO_PLAYER) { /* Start game */ }
