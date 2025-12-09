@@ -10,7 +10,7 @@ const GAME_HEIGHT = 262;
 const GAME_X_OFFSET = (WIDTH - GAME_WIDTH) / 2;
 const GAME_Y_OFFSET = (HEIGHT - GAME_HEIGHT) / 2;
 
-const SCALE_FACTOR = GAME_WIDTH / 1000; // Original was 1000x1000
+const SCALE_FACTOR = 2 * GAME_WIDTH / 1000; // Original was 1000x1000
 
 const sketch = (p) => {
     let tanks = [];
@@ -35,13 +35,13 @@ const sketch = (p) => {
 
         // Player 1
         tanks.push({
-            x: GAME_X_OFFSET + GAME_WIDTH / 2,
+            x: GAME_X_OFFSET + GAME_WIDTH / 4,
             y: GAME_Y_OFFSET + GAME_HEIGHT / 2,
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 1,
-            bodyAngle: p.PI / 2, // Pointing up
-            turretAngle: p.PI / 2
+            bodyAngle: 0, // Pointing up
+            turretAngle: 0
         });
         // Player 2
         tanks.push({
@@ -50,8 +50,8 @@ const sketch = (p) => {
             w: 50 * SCALE_FACTOR,
             h: 40 * SCALE_FACTOR,
             player: 2,
-            bodyAngle: -p.PI / 2, // Pointing down
-            turretAngle: -p.PI / 2
+            bodyAngle: p.PI, 
+            turretAngle: p.PI
         });
         bullets = [];
 
@@ -79,7 +79,7 @@ const sketch = (p) => {
             p.textSize(18);
             p.text("Press 2P START", WIDTH / 2, HEIGHT / 2);
             p.textSize(12);
-            p.text("Use D-PAD to move, SPINNER to rotate turret, BUTTONs to spray water or seeds", WIDTH / 2, HEIGHT / 2 + 30);
+            p.text("Use D-PAD to move, \nSPINNER to rotate turret, \nBUTTONs to spray water or seeds", WIDTH / 2, HEIGHT / 2 + 30);
 
             if (SYSTEM.TWO_PLAYER) {
                 gameStarted = true;
@@ -92,10 +92,10 @@ const sketch = (p) => {
         p.noStroke();
         p.rect(GAME_X_OFFSET + GAME_WIDTH / 2, GAME_Y_OFFSET + GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT);
 
-        if (PLAYER_1.A) {
+        if (PLAYER_1.A || PLAYER_1.B) {
             p.fireBullet(tanks[0]);
         }
-        if (PLAYER_2.A) {
+        if (PLAYER_2.A || PLAYER_2.B) {
             p.fireBullet(tanks[1]);
         }
 
@@ -156,16 +156,16 @@ const sketch = (p) => {
 
         // Screen wrapping for both tanks
         for (let tank of tanks) {
-            if (tank.x > width + tank.w / 2) {
-            tank.x = -tank.w / 2;
-            } else if (tank.x < -tank.w / 2) { // TODO: This should be based on game area
-            tank.x = width + tank.w / 2;
+            if (tank.x > GAME_X_OFFSET + GAME_WIDTH + tank.w / 2) {
+            tank.x = GAME_X_OFFSET - tank.w / 2;
+            } else if (tank.x < GAME_X_OFFSET - tank.w / 2) { // TODO: This should be based on game area
+            tank.x = GAME_X_OFFSET + GAME_WIDTH + tank.w / 2;
             }
 
-            if (tank.y > height + tank.h / 2) {
+            if (tank.y > GAME_HEIGHT + tank.h / 2) {
             tank.y = -tank.h / 2;
             } else if (tank.y < -tank.h / 2) { // TODO: This should be based on game area
-            tank.y = height + tank.h / 2;
+            tank.y = GAME_HEIGHT + tank.h / 2;
             }
         }
     };
@@ -297,6 +297,7 @@ const sketch = (p) => {
             p.fill(0);
             p.stroke(0, 128, 0);
             p.ellipse(0, 0, 30 * SCALE_FACTOR, 30 * SCALE_FACTOR); // Turret base
+            p.strokeWeight(3)
             p.line(0, 0, 40 * SCALE_FACTOR, 0); // Turret barrel
             p.pop();
 
@@ -352,7 +353,7 @@ const sketch = (p) => {
 
     p.drawBullets = () => {
         p.stroke(0, 128, 0);
-        p.strokeWeight(3);
+        p.strokeWeight(1);
         for (let bullet of bullets) {
             p.push();
             p.translate(bullet.x, bullet.y);
