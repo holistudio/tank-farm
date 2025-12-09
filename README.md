@@ -1,8 +1,6 @@
 # Tanks Go Bloom
 
-two tanks growing together
-
-This is an RCade port of project-tank p5js game.
+This is an RCade port of [project-tank](https://github.com/holistudio/project-tank) p5js game.
 
 It is now LIVE on RCade at [The Recurse Center](https://recurse.com)
 
