@@ -147,7 +147,7 @@ const sketch = (p) => {
             tanks[1].bodyAngle += tankRotationSpeed;
         }
         // tanks[1].turretAngle -= SPINNER_2.SPINNER.step_delta;
-        tanks[1].turretAngle = SPINNER_2.SPINNER.angle;
+        tanks[1].turretAngle = SPINNER_2.SPINNER.angle +p.PI;
 
         // Screen wrapping for both tanks
         for (let tank of tanks) {
@@ -192,7 +192,7 @@ const sketch = (p) => {
                 if (gridState[i][j].fullyCaptured) {
                 p.fill(0, 255, 0); // Fully opaque green
                 } else {
-                p.fill(0, 255, 0, 64); // Green with 75% transparency (25% opacity)
+                p.fill(0, 255, 0, 79); // Green with 75% transparency (25% opacity)
                 }
                 p.rect(GAME_X_OFFSET + i * GRID_CELL_SIZE, GAME_Y_OFFSET + j * GRID_CELL_SIZE, GRID_CELL_SIZE, GRID_CELL_SIZE);
             }
@@ -286,8 +286,13 @@ const sketch = (p) => {
             p.rect(0, 0, tank.w, tank.h);
             p.pop();
 
+            // Calculate the offset for the turret towards the back of the tank
+            const turretOffsetX = -2 * p.cos(tank.bodyAngle);
+            const turretOffsetY = -2 * p.sin(tank.bodyAngle);
+
             // Turret
             p.push();
+            p.translate(turretOffsetX, turretOffsetY); // Apply the offset
             p.rotate(tank.turretAngle);
             p.fill(0);
             p.stroke(0, 128, 0);
