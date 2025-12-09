@@ -1,6 +1,6 @@
 import p5 from "p5";
 import { PLAYER_1, PLAYER_2, SYSTEM } from "@rcade/plugin-input-classic";
-// import { PLAYER_1, PLAYER_2, SYSTEM } from "@rcade/plugin-input-spinners";
+import { PLAYER_1 as SPINNER_1, PLAYER_2 as SPINNER_2 } from "@rcade/plugin-input-spinners";
 
 // Rcade game dimensions
 const WIDTH = 336;
@@ -126,12 +126,11 @@ const sketch = (p) => {
         if (PLAYER_1.DPAD.right) { // D - rotate right
             tanks[0].bodyAngle += tankRotationSpeed;
         }
-        if (p.keyIsDown(66)) { // TODO: SPINNER
-            tanks[0].turretAngle -= turretSpeed;
-        }
-        if (p.keyIsDown(78)) { // TODO: SPINNER
-            tanks[0].turretAngle += turretSpeed;
-        }
+
+        // tanks[0].turretAngle -= SPINNER_1.SPINNER.step_delta;
+        // console.log(SPINNER_1.SPINNER.angle)
+        tanks[0].turretAngle = SPINNER_1.SPINNER.angle;
+
         // Player 2 Controls (Arrow Keys, 2, 3)
         if (PLAYER_2.DPAD.up) { // Forward
             tanks[1].x += tankSpeed * p.cos(tanks[1].bodyAngle);
@@ -147,12 +146,8 @@ const sketch = (p) => {
         if (PLAYER_2.DPAD.right) { // Rotate right
             tanks[1].bodyAngle += tankRotationSpeed;
         }
-        if (p.keyIsDown(99)) { // TODO: SPINNER
-            tanks[1].turretAngle -= turretSpeed;
-        }
-        if (p.keyIsDown(98)) { // TODO: SPINNER
-            tanks[1].turretAngle += turretSpeed;
-        }
+        // tanks[1].turretAngle -= SPINNER_2.SPINNER.step_delta;
+        tanks[1].turretAngle = SPINNER_2.SPINNER.angle;
 
         // Screen wrapping for both tanks
         for (let tank of tanks) {
