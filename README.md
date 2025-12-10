@@ -1,4 +1,4 @@
-# Tanks Go Bloom
+# Tanks Go Bloom 🌱
 
 This is an RCade port of [project-tank](https://github.com/holistudio/project-tank) p5js game.
 
@@ -6,7 +6,7 @@ It is now LIVE on RCade at [The Recurse Center](https://recurse.com)
 
 https://github.com/user-attachments/assets/84a730c8-a320-4a74-9a29-5a4ce402c16c
 
-## Getting Started
+## Getting Started 🛠️
 
 Install dependencies:
 
@@ -22,7 +22,7 @@ npm run dev
 
 This launches Vite on port 5173 and connects to the RCade cabinet emulator.
 
-## Emulator Controls
+## Emulator Controls ⌨️
 
 ```
   | Key      | Action           |
@@ -54,7 +54,7 @@ This launches Vite on port 5173 and connects to the RCade cabinet emulator.
   | /   | P2 Spinner Right |
 ```
 
-## Building
+## Building 🏗️
 
 ```bash
 npm run build
@@ -62,7 +62,7 @@ npm run build
 
 Output goes to `dist/` and is ready for deployment.
 
-## Project Structure
+## Project Structure 🗂️
 
 ```
 ├── src/
@@ -72,7 +72,7 @@ Output goes to `dist/` and is ready for deployment.
 └── package.json
 ```
 
-## Arcade Controls
+## Arcade Controls 🕹️
 
 This template uses `@rcade/plugin-input-classic` and `@rcade/plugin-input-spinners` for arcade input:
 
@@ -99,13 +99,9 @@ tank.turretAngle = SPINNER_1.SPINNER.angle
 if (SYSTEM.TWO_PLAYER) { /* Start game */ }
 ```
 
-## About RCade
+## About RCade 👾
 
 This game is built for [RCade](https://rcade.recurse.com), a custom arcade cabinet at The Recurse Center. Learn more about the project at [github.com/fcjr/RCade](https://github.com/fcjr/RCade).
-
-## RCade Screen Size
-
-The RCade cabinet uses a 336x262 pixel display. The template is pre-configured with these dimensions.
 
 ---
 
