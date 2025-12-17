@@ -3,7 +3,7 @@
   "name": "tank-farm",
   "display_name": "Tanks Go Bloom",
   "description": "two tanks growing together",
-  "visibility": "internal",
+  "visibility": "public",
   "authors": {
     "display_name": "Dan Lu"
   },
